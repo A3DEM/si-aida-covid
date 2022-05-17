@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le :  mar. 17 mai 2022 à 12:25
+-- Généré le :  mar. 17 mai 2022 à 12:52
 -- Version du serveur :  5.7.11
 -- Version de PHP :  7.0.3
 
@@ -56,6 +56,8 @@ CREATE TABLE `personne` (
   `prenom` varchar(50) DEFAULT NULL,
   `dateNaissance` date DEFAULT NULL,
   `adresse` varchar(100) DEFAULT NULL,
+  `role` int(11) NOT NULL,
+  `identifiant` varchar(24) NOT NULL,
   `motdepasse` varchar(50) DEFAULT NULL,
   `idVaccin` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -64,9 +66,9 @@ CREATE TABLE `personne` (
 -- Déchargement des données de la table `personne`
 --
 
-INSERT INTO `personne` (`idPersonne`, `nom`, `prenom`, `dateNaissance`, `adresse`, `motdepasse`, `idVaccin`) VALUES
-(1, 'duran', 'adem', '2002-02-21', '42 Bd Stoessel, Mulhouse 681000', 'akimbo', 1),
-(2, 'abdelkrim', 'fares', '2000-02-23', '61 Rue Albert Camus, Mulhouse 68200', 'menteur', 1);
+INSERT INTO `personne` (`idPersonne`, `nom`, `prenom`, `dateNaissance`, `adresse`, `role`, `identifiant`, `motdepasse`, `idVaccin`) VALUES
+(1, 'duran', 'adem', '2002-02-21', '42 Bd Stoessel, Mulhouse 681000', 0, 'ademduran', 'akimbo', 1),
+(2, 'abdelkrim', 'fares', '2000-02-23', '61 Rue Albert Camus, Mulhouse 68200', 0, 'faresabdelkrim', 'menteur', 1);
 
 -- --------------------------------------------------------
 
