@@ -1,35 +1,45 @@
 <?php
-function processConnexion() {
+function processConnexion()
+{
     if ($_POST["username"] === '' || $_POST["password"] === '' || !isset($_POST["username"]) || !isset($_POST["password"])) {
         $message = "Veuillez remplir les deux champs";
         return $message;
     }
-    
-    $database = new mysqli("localhost", "root", "", "si_gestion_publi");
-    
+
+    $database = new mysqli("localhost", "root", "", "si_aida_covid");
+
     if ($database->connect_error) {
         $message = "Veuillez remplir les deux champs";
         return $message;
     }
-    
-    $request = $database->prepare("SELECT idMembre, nom, prenom, idDomaine FROM membres WHERE username=? AND password=?");
+
+    $request = $database->prepare("SELECT role, idPersonne FROM personne WHERE identifiant=? AND motdepasse=?");
     $request->bind_param('ss', $_POST['username'], $_POST['password']);
-    
+
     $request->execute();
-    $request->bind_result($userId, $nom, $prenom, $idDomaine);
+    $request->bind_result($role, $userId);
     $request->fetch();
 
     if (isset($userId)) {
         session_start();
         $_SESSION['connectedId'] = $userId;
-        header("Location: membre/index.php");
+        $_SESSION['role'] = $role;
+        var_dump($role);
+        if ($role === 1) {
+            header("Location: admin/index.php");
+        } else {
+            header("Location: membre/index.php");
+        }
     } else {
         $message = "Identifiants incorrects";
         return $message;
     }
 }
 
-$message = processConnexion();
+if (isset($_POST["connect"])) {
+    $message = processConnexion();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -57,8 +67,8 @@ $message = processConnexion();
             <input name="password" id="password" type="password">
         </div>
         <p class="inscription">Pas encore de compte ? <a href="inscription.php">Inscrivez vous !</a></p>
-        <p class="message" <?php if (isset($message)) echo 'style="display: initial !important"'?>><?php if (isset($message)) echo $message; ?></p>
-        <input type="submit" id="connect" value="Se connecter"/>
+        <p class="message" <?php if (isset($message)) echo 'style="display: initial !important"' ?>><?php if (isset($message)) echo $message; ?></p>
+        <input type="submit" id="connect" name="connect" value="Se connecter" />
     </form>
 </body>
 
