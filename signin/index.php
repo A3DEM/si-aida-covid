@@ -39,7 +39,6 @@
             $queryInsert["identifiant"] = $_POST["identifiant"];
             $queryInsert["motdepasse"] = $_POST["motdepasse"];
             $queryInsert["vaccin"] = intval($_POST["vaccin"]);
-
                          
             $query = "INSERT INTO `personne`(`nom`, `prenom`, `dateNaissance`, `adresse`, `role`, `identifiant`, `motdepasse`, `idVaccin`) VALUES (?,?,?,?,?,?,?,?)";
             $requestInsert = $database->prepare($query);
