@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le :  mar. 17 mai 2022 à 12:52
+-- Généré le :  Dim 22 mai 2022 à 07:29
 -- Version du serveur :  5.7.11
 -- Version de PHP :  7.0.3
 
@@ -68,7 +68,9 @@ CREATE TABLE `personne` (
 
 INSERT INTO `personne` (`idPersonne`, `nom`, `prenom`, `dateNaissance`, `adresse`, `role`, `identifiant`, `motdepasse`, `idVaccin`) VALUES
 (1, 'duran', 'adem', '2002-02-21', '42 Bd Stoessel, Mulhouse 681000', 0, 'ademduran', 'akimbo', 1),
-(2, 'abdelkrim', 'fares', '2000-02-23', '61 Rue Albert Camus, Mulhouse 68200', 0, 'faresabdelkrim', 'menteur', 1);
+(2, 'abdelkrim', 'fares', '2000-02-23', '61 Rue Albert Camus, Mulhouse 68200', 0, 'faresabdelkrim', 'menteur', 1),
+(3, 'Wick', 'John', '1990-07-21', 'Continental, New-York', 1, 'johnwick', 'doggo', 2),
+(4, 'Vachter', 'Lazar', '1988-09-11', 'Rue de la Paix, Paris', 1, 'lazar', 'django', 2);
 
 -- --------------------------------------------------------
 
@@ -177,7 +179,7 @@ ALTER TABLE `persone_vaccination`
 -- AUTO_INCREMENT pour la table `personne`
 --
 ALTER TABLE `personne`
-  MODIFY `idPersonne` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idPersonne` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `possède`
