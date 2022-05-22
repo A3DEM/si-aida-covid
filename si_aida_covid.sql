@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le :  mar. 17 mai 2022 à 12:52
+-- Généré le :  Dim 22 mai 2022 à 14:54
 -- Version du serveur :  5.7.11
 -- Version de PHP :  7.0.3
 
@@ -33,16 +33,17 @@ CREATE TABLE `maladie` (
   `nom` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
-
 --
--- Structure de la table `persone_vaccination`
+-- Déchargement des données de la table `maladie`
 --
 
-CREATE TABLE `persone_vaccination` (
-  `idPersonne` int(11) NOT NULL,
-  `idVaccination` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO `maladie` (`idMaladie`, `nom`) VALUES
+(0, 'Aucune'),
+(1, 'Diabète'),
+(2, 'Tension'),
+(3, 'Insuffisance rénale'),
+(4, 'Insuffisance respiratoire'),
+(5, 'Immunoinsuffisance');
 
 -- --------------------------------------------------------
 
@@ -68,7 +69,14 @@ CREATE TABLE `personne` (
 
 INSERT INTO `personne` (`idPersonne`, `nom`, `prenom`, `dateNaissance`, `adresse`, `role`, `identifiant`, `motdepasse`, `idVaccin`) VALUES
 (1, 'duran', 'adem', '2002-02-21', '42 Bd Stoessel, Mulhouse 681000', 0, 'ademduran', 'akimbo', 1),
-(2, 'abdelkrim', 'fares', '2000-02-23', '61 Rue Albert Camus, Mulhouse 68200', 0, 'faresabdelkrim', 'menteur', 1);
+(2, 'abdelkrim', 'fares', '2000-02-23', '61 Rue Albert Camus, Mulhouse 68200', 0, 'faresabdelkrim', 'menteur', 1),
+(3, 'Wick', 'John', '1990-07-21', 'Continental, New-York', 1, 'johnwick', 'doggo', 2),
+(4, 'Wann', 'Alpha', '1993-08-09', 'Avenue des Champs-Elysées', 1, 'philly', 'flingo', 1),
+(5, 'Zen', 'Chen', '2022-01-01', 'Boulevard de la SACEM', 1, 'zenchen667', 'ekip', 4),
+(6, 'Schwarzer', 'Julien', '2022-01-01', '13 rue de la Maison Baron Rouge', 1, 'incroyablemec', 'otto', 4),
+(7, 'Yaffa', 'Elie', '2022-01-01', 'En bas de chez toi', 1, 'booba', '92izi', 1),
+(8, 'Gnakouri', 'Okou', '2022-01-01', 'L\'échec', 1, 'kaaris', 'deuxsept', 3),
+(9, 'Wann', 'Alpha', '1993-08-09', 'Avenue des Champs-Elysées', 1, 'philly', 'flingo', 1);
 
 -- --------------------------------------------------------
 
@@ -80,6 +88,18 @@ CREATE TABLE `possède` (
   `idPersonne` int(11) NOT NULL,
   `idMaladie` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `possède`
+--
+
+INSERT INTO `possède` (`idPersonne`, `idMaladie`) VALUES
+(1, 0),
+(2, 0),
+(9, 1),
+(3, 2),
+(8, 2),
+(7, 4);
 
 -- --------------------------------------------------------
 
@@ -111,8 +131,20 @@ INSERT INTO `typevaccin` (`idVaccin`, `nom`) VALUES
 CREATE TABLE `vaccination` (
   `idVaccination` int(11) NOT NULL,
   `numDose` int(11) DEFAULT NULL,
-  `estVaccine` tinyint(1) DEFAULT NULL
+  `estVaccine` tinyint(1) DEFAULT NULL,
+  `idPersonne` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `vaccination`
+--
+
+INSERT INTO `vaccination` (`idVaccination`, `numDose`, `estVaccine`, `idPersonne`) VALUES
+(2, 1, 1, 3),
+(3, 2, 1, 3),
+(4, 1, 0, 4),
+(10, 1, 1, 9),
+(11, 2, 0, 9);
 
 --
 -- Index pour les tables déchargées
@@ -123,13 +155,6 @@ CREATE TABLE `vaccination` (
 --
 ALTER TABLE `maladie`
   ADD PRIMARY KEY (`idMaladie`);
-
---
--- Index pour la table `persone_vaccination`
---
-ALTER TABLE `persone_vaccination`
-  ADD PRIMARY KEY (`idPersonne`,`idVaccination`),
-  ADD KEY `idVaccination` (`idVaccination`);
 
 --
 -- Index pour la table `personne`
@@ -155,7 +180,8 @@ ALTER TABLE `typevaccin`
 -- Index pour la table `vaccination`
 --
 ALTER TABLE `vaccination`
-  ADD PRIMARY KEY (`idVaccination`);
+  ADD PRIMARY KEY (`idVaccination`),
+  ADD KEY `idPersonne` (`idPersonne`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -165,25 +191,19 @@ ALTER TABLE `vaccination`
 -- AUTO_INCREMENT pour la table `maladie`
 --
 ALTER TABLE `maladie`
-  MODIFY `idMaladie` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `persone_vaccination`
---
-ALTER TABLE `persone_vaccination`
-  MODIFY `idPersonne` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idMaladie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `personne`
 --
 ALTER TABLE `personne`
-  MODIFY `idPersonne` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idPersonne` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT pour la table `possède`
 --
 ALTER TABLE `possède`
-  MODIFY `idPersonne` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPersonne` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT pour la table `typevaccin`
@@ -195,18 +215,11 @@ ALTER TABLE `typevaccin`
 -- AUTO_INCREMENT pour la table `vaccination`
 --
 ALTER TABLE `vaccination`
-  MODIFY `idVaccination` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idVaccination` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Contraintes pour les tables déchargées
 --
-
---
--- Contraintes pour la table `persone_vaccination`
---
-ALTER TABLE `persone_vaccination`
-  ADD CONSTRAINT `persone_vaccination_ibfk_1` FOREIGN KEY (`idPersonne`) REFERENCES `personne` (`idPersonne`),
-  ADD CONSTRAINT `persone_vaccination_ibfk_2` FOREIGN KEY (`idVaccination`) REFERENCES `vaccination` (`idVaccination`);
 
 --
 -- Contraintes pour la table `personne`
@@ -220,6 +233,12 @@ ALTER TABLE `personne`
 ALTER TABLE `possède`
   ADD CONSTRAINT `possède_ibfk_1` FOREIGN KEY (`idPersonne`) REFERENCES `personne` (`idPersonne`),
   ADD CONSTRAINT `possède_ibfk_2` FOREIGN KEY (`idMaladie`) REFERENCES `maladie` (`idMaladie`);
+
+--
+-- Contraintes pour la table `vaccination`
+--
+ALTER TABLE `vaccination`
+  ADD CONSTRAINT `vaccination_ibfk_1` FOREIGN KEY (`idPersonne`) REFERENCES `personne` (`idPersonne`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
