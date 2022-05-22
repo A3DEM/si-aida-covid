@@ -8,34 +8,17 @@ body {
 /*// Header //*/
 
 header {
-    padding: 20px 40px;
-}
-
-header ul {
-    list-style-type: none;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    margin: 0;
-    padding: 0;
-}
-
-header li {
-    display: flex;
+    padding-top: 20px;
+    color: #5b17da;
     font-weight: bold;
-    font-size: x-large;
 }
-
 header svg {
-    background-color: white;
-    padding: 10px;
-    border-radius: 10px;
-    transition: 0.3s ease-in-out;
-}
-
-header svg:hover {
-    box-shadow: 0px 0px 20px #5b17da;
-    cursor: pointer;
+    width: 10%;
+    height: auto;
+    margin: 0px 10px;
 }
 
 /*// Main //*/
@@ -153,6 +136,7 @@ a {
 .infos {
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
 }
 
 .infos p {
@@ -210,5 +194,42 @@ a {
 }
 
 input[type="submit"] {
+    cursor: pointer;
+}
+
+
+header ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    width: 90%;
+}
+
+header li {
+    display: flex;
+    font-weight: bold;
+    font-size: x-large;
+}
+
+header .disconnect svg {
+    background-color: white;
+    height: 80%;
+    padding: 10px;
+    width: auto;
+    margin: 0px;
+    border-radius: 10px;
+    transition: 0.3s ease-in-out;
+}
+
+header .disconnect {
+    border-radius: 10px;
+    margin-left: auto;
+}
+
+header .disconnect:hover {
+    box-shadow: 0px 0px 20px #5b17da;
     cursor: pointer;
 }
