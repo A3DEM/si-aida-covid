@@ -25,7 +25,7 @@ function processConnexion()
         $_SESSION['connectedId'] = $userId;
         $_SESSION['role'] = $role;
         var_dump($role);
-        if ($role === 1) {
+        if ($role === 0) {
             header("Location: admin/index.php");
         } else {
             header("Location: membre/index.php");

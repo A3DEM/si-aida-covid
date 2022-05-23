@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le :  Dim 22 mai 2022 à 14:54
+-- Généré le :  lun. 23 mai 2022 à 09:04
 -- Version du serveur :  5.7.11
 -- Version de PHP :  7.0.3
 
@@ -68,15 +68,15 @@ CREATE TABLE `personne` (
 --
 
 INSERT INTO `personne` (`idPersonne`, `nom`, `prenom`, `dateNaissance`, `adresse`, `role`, `identifiant`, `motdepasse`, `idVaccin`) VALUES
-(1, 'duran', 'adem', '2002-02-21', '42 Bd Stoessel, Mulhouse 681000', 0, 'ademduran', 'akimbo', 1),
-(2, 'abdelkrim', 'fares', '2000-02-23', '61 Rue Albert Camus, Mulhouse 68200', 0, 'faresabdelkrim', 'menteur', 1),
+(1, 'duran', 'adem', '1999-02-21', '42 Bd Stoessel, Mulhouse 681000', 1, 'ademduran', 'akimbo', 1),
+(2, '667', 'Steward', '2000-02-23', '61 Rue Albert Camus, Mulhouse 68200', 1, 'faresabdelkrim', 'menteur', 1),
 (3, 'Wick', 'John', '1990-07-21', 'Continental, New-York', 1, 'johnwick', 'doggo', 2),
-(4, 'Wann', 'Alpha', '1993-08-09', 'Avenue des Champs-Elysées', 1, 'philly', 'flingo', 1),
+(4, 'Vachter', 'Lazar', '1993-08-09', 'Avenue des Champs-Elysées', 1, 'django', 'frelon', 1),
 (5, 'Zen', 'Chen', '2022-01-01', 'Boulevard de la SACEM', 1, 'zenchen667', 'ekip', 4),
 (6, 'Schwarzer', 'Julien', '2022-01-01', '13 rue de la Maison Baron Rouge', 1, 'incroyablemec', 'otto', 4),
-(7, 'Yaffa', 'Elie', '2022-01-01', 'En bas de chez toi', 1, 'booba', '92izi', 1),
+(7, 'Yaffa', 'Elie', '1982-01-01', 'En bas de chez toi', 1, 'booba', '92izi', 1),
 (8, 'Gnakouri', 'Okou', '2022-01-01', 'L\'échec', 1, 'kaaris', 'deuxsept', 3),
-(9, 'Wann', 'Alpha', '1993-08-09', 'Avenue des Champs-Elysées', 1, 'philly', 'flingo', 1);
+(9, 'Wann', 'Alpha', '1993-08-09', 'Avenue des Champs-Elysées', 1, 'philly', 'flingo', 4);
 
 -- --------------------------------------------------------
 
@@ -94,12 +94,23 @@ CREATE TABLE `possède` (
 --
 
 INSERT INTO `possède` (`idPersonne`, `idMaladie`) VALUES
-(1, 0),
-(2, 0),
+(2, 1),
+(7, 1),
 (9, 1),
-(3, 2),
+(1, 2),
+(2, 2),
+(7, 2),
 (8, 2),
-(7, 4);
+(2, 3),
+(3, 3),
+(7, 3),
+(9, 3),
+(2, 4),
+(6, 4),
+(7, 4),
+(9, 4),
+(2, 5),
+(7, 5);
 
 -- --------------------------------------------------------
 
@@ -144,7 +155,10 @@ INSERT INTO `vaccination` (`idVaccination`, `numDose`, `estVaccine`, `idPersonne
 (3, 2, 1, 3),
 (4, 1, 0, 4),
 (10, 1, 1, 9),
-(11, 2, 0, 9);
+(11, 2, 0, 9),
+(20, 1, 1, 1),
+(21, 2, 1, 1),
+(22, 1, 0, 2);
 
 --
 -- Index pour les tables déchargées
@@ -215,7 +229,7 @@ ALTER TABLE `typevaccin`
 -- AUTO_INCREMENT pour la table `vaccination`
 --
 ALTER TABLE `vaccination`
-  MODIFY `idVaccination` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idVaccination` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Contraintes pour les tables déchargées

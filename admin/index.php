@@ -78,14 +78,14 @@ header('Content-type: text/html; charset=utf-8');
                         <div class="maladies">
                             <h3>Nombre de maladies</h3>
 
-                            <input type="number" name="maladies" id="maladies" <?php if (isset($_GET["maladies"])) echo "value=\"" . $_GET["maladies"] . "\""; ?>>
+                            <input type="number" name="maladies" min="0" id="maladies" <?php if (isset($_GET["maladies"])) echo "value=\"" . $_GET["maladies"] . "\""; ?>>
                             </input>
                         </div>
 
                         <div class="doses">
                             <h3>Nombre de doses</h3>
 
-                            <input type="number" name="doses" id="doses" <?php if (isset($_GET["doses"])) echo "value=\"" . $_GET["doses"] . "\""; ?>>
+                            <input type="number" name="doses" min="0" id="doses" <?php if (isset($_GET["doses"])) echo "value=\"" . $_GET["doses"] . "\""; ?>>
                             </input>
                         </div>
 
@@ -141,7 +141,7 @@ header('Content-type: text/html; charset=utf-8');
                                 }
                         }
                     }
-                    if (!empty($_GET["maladies"]) || !empty($_GET["doses"])  || $_GET['maladies'] === '0' || $_GET['doses'] === '0')
+                    if (!empty($_GET["maladies"]) || !empty($_GET["doses"])  || (!empty($_GET["maladies"])  && $_GET['maladies'] === '0') || (!empty($_GET["doses"]) && $_GET['doses'] === '0'))
                         $secondFilters = "HAVING ";
                     if (isset($_GET["maladies"]) && ($_GET["maladies"] !== "" || $_GET['maladies'] === '0')) {
                         $secondFilters .= "COUNT(DISTINCT possède.idMaladie)=" . $_GET["maladies"] . " ";
