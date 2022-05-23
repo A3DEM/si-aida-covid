@@ -106,7 +106,7 @@ header('Content-type: text/html; charset=utf-8');
                 $queryFilter = "";
                 $secondFilters = "";
 
-                if (isset($_GET) && !empty($_GET) && (!empty($_GET["age"]) || !empty($_GET["maladies"]) || !empty($_GET["doses"]) || $_GET['maladies'] === '0' || $_GET['doses'] === '0')) {
+                if (isset($_GET) && !empty($_GET) && !(count($_GET) === 1 && isset($_GET['page'])) && (!empty($_GET["age"]) || !empty($_GET["maladies"]) || !empty($_GET["doses"]) || $_GET['maladies'] === '0' || $_GET['doses'] === '0')) {
 
                     // var_dump($_GET);
                     if (isset($_GET["age"]) && $_GET["age"] == "") {

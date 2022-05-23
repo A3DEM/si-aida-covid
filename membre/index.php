@@ -24,7 +24,7 @@ if (isset($_POST) && !empty($_POST)) {
 
         $hasError = true;
 
-        $queryUpdate = "";
+        $queryUpdate = [];
 
         $queryUpdate["nom"] = $_POST["nom"];
         $queryUpdate["prenom"] = $_POST["prenom"];
@@ -44,21 +44,20 @@ if (isset($_POST) && !empty($_POST)) {
         }
 
         $requestUpdate->close();
-
+        $queryInsertMaladies = [];
         if (isset($_POST["maladie"]) && !empty($_POST["maladie"])) {
             foreach ($_POST["maladie"] as $maladie) {
-                $queryInsert["maladie"][] = intval($maladie);
+                $queryInsertMaladies[] = intval($maladie);
             }
         } else {
-            $queryInsert["maladie"][] = 0;
+            $queryInsertMaladies[] = 0;
         }
-
         $requestDeleteMaladie = $database->prepare("DELETE FROM `possède` WHERE idPersonne = $id");
         $requestDeleteMaladie->execute();
 
-        foreach ($queryInsert["maladie"] as $maladie) {
+        foreach ($queryInsertMaladies as $maladie) {
 
-            $query = "INSERT INTO `possède`(`idPersonne`, `idMaladie`) VALUES (9,?)";
+            $query = "INSERT INTO `possède`(`idPersonne`, `idMaladie`) VALUES ($id,?)";
 
             $requestInsertMaladie = $database->prepare($query);
             $requestInsertMaladie->bind_param('i', $maladie);
@@ -265,6 +264,7 @@ $months = [
                     <select name="maladie[]" id="maladie" multiple>
 
                         <?php
+                        $listMaladie = [];
                         $requestListMaladie = $database->prepare("SELECT idMaladie FROM `possède` WHERE idPersonne = $id ");
                         $requestListMaladie->execute();
                         $requestListMaladie->bind_result($idMaladie);
